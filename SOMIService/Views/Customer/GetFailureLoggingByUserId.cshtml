@@ -1,0 +1,53 @@
+﻿@model List<CustomerFailureViewModel>
+<h3>Failure Record</h3>
+
+<table class="table table-bordered" id="personel">
+    <tr>
+        <th>UserName</th>
+        <th>Email</th>
+        <th>PhoneNumber</th>
+        <th>Adres</th>
+        <th>Description</th>
+        <th>Created Date</th>
+        <th>Fault Situation</th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@ViewBag.UserName</td>
+            <td>@ViewBag.Email</td>
+            <td>@item.PhoneNumber</td>
+            <td>@item.Address</td>
+            <td>@item.Description</td>
+            <td>@item.CreatedDate</td>
+            <td>@item.FaultIsFixxed</td>
+        </tr>
+    }
+
+</table>
+
+<style>
+    #personel {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        #personel td, #personel th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #personel tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #personel th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #2c3e50;
+            color: white;
+        }
+</style>
+

@@ -1,0 +1,72 @@
+﻿@inject SignInManager<ApplicationUser> SignInManager
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky" data-offset="500">
+        <div class="container">
+            <a href="#" class="navbar-brand">OMIS ASUS <span class="text-primary">TECHNICAL SERVICE</span></a>
+
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse collapse" id="navbarContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">AnaSayfa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="About">Hakkımızda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Service">Servislerimiz</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Contact">İletişim</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Blog">Blog</a>
+                    </li>
+                    @if (SignInManager.IsSignedIn(Context.User))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Account" asp-action="Profile">Profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-danger" asp-controller="Customer" asp-action="AddFailureLogging">Arıza Kayıt</a>
+                        </li>
+                    }
+
+                    <li class="nav-item">
+                        @if (SignInManager.IsSignedIn(Context.User))
+                        {
+                            <a class="btn btn-primary ml-lg-2" asp-controller="Account" asp-action="Logout">Çıkış Yap</a>
+
+                        }
+                        else
+                        { <a class="btn btn-success ml-lg-2" asp-controller="Account" asp-action="Login">Giriş Yap</a>
+
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    @*<div class="container">
+            <div class="page-banner home-banner">
+                <div class="row align-items-center flex-wrap-reverse h-100">
+                    <div class="col-md-6 py-5 wow fadeInLeft">
+                        <h1 class="mb-4">Sitemize Gözatmak İster misiniz?</h1>
+                        <p class="text-lg text-grey mb-5">Size en iyi hizmeti verecek teknik servisi tercih edebilirsiniz.</p>
+                        <a href="#" class="btn btn-primary btn-split">Videoyu İzle<div class="fab"><span class="mai-play"></span></div></a>
+                    </div>
+                    <div class="col-md-6 py-5 wow zoomIn">
+                        <div class="img-fluid text-center">
+                            <img src="../assets/img/banner_image_1.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <a href="#about" class="btn-scroll" data-role="smoothscroll"><span class="mai-arrow-down"></span></a>
+            </div>
+        </div>*@
+</header>
+

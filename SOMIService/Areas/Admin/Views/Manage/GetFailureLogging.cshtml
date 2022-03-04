@@ -1,0 +1,219 @@
+﻿@{
+    ViewBag.Title = "Fault Records";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h4 class="card-title">Arıza Kayıtları</h4>
+                        </div><!--end col--->
+                    </div><!--end row--->
+                </div><!--end card-header--->
+                <div class="card-body">
+                    <div id="dxGrid"></div>
+                </div> <!--end card-body--->
+            </div><!--end card--->
+        </div><!--end col--->
+    </div><!--end row--->
+</div>
+
+@section Scripts
+
+{
+    <script src="~/vendor/devextreme-aspnet-data/js/dx.aspnet.data.js"></script>
+    <script>
+        var dataGrid = null;
+        $(() => {
+            var url = '../../../api/FailureApi';
+            const dataGrid = $('#dxGrid').dxDataGrid({
+                    remoteOperations: { paging: true, filtering: true, sorting: true, grouping: true, summary: true, groupPaging: true },
+                    dataSource: DevExpress.data.AspNet.createStore({
+                        key: 'failureLoggingId',
+                        loadUrl: `${url}/get`,
+                        onBeforeSend(method, ajaxOptions) {
+                            ajaxOptions.xhrFields = { withCredentials: true };
+                            console.log(method);
+                            console.log(ajaxOptions);
+                        }
+                    }),
+                    allowColumnReordering: true,
+                    allowColumnResizing: true,
+                    showColumnLines: true,
+                    showRowLines: true,
+                    rowAlternationEnabled: true,
+                    showBorders: true,
+                    grouping: {
+                        autoExpandAll: true,
+                    },
+                    searchPanel: {
+                        visible: true,
+                    },
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto"
+                    },
+                    headerFilter: {
+                        visible: true
+                    },
+                    paging: {
+                        pageSize: 10,
+                    },
+                    groupPanel: {
+                        visible: true,
+                    },
+                    pager: {
+                        showPageSizeSelector: true,
+                        allowedPageSizes: [5, 15, 30, 45],
+                        showInfo: true
+                    },
+                    selection: {
+                        mode: "multiple"
+                    },
+                    columns: [
+                        {
+                            caption: 'Müşteri',
+                            dataField: "userId",
+                            visible: false,
+                            allowFiltering: false,
+                            formItem: { visible: false }
+                        },
+                        {
+                            caption: 'Müşteri Adı',
+                            dataField: "applicationUser.name"
+                        },
+                        {
+                            caption: 'Müşteri Soyadı',
+                            dataField: "applicationUser.surname"
+                        },
+                        {
+                            caption: 'Müşteri Kullanıcı Adı',
+                            dataField: "applicationUser.userName"
+                        },
+                        {
+                            caption: 'Adres',
+                            dataField: "address"
+                        },
+                        {
+                            caption: 'Telefon Numarası',
+                            dataField: "phoneNumber"
+                            
+                        },
+                        {
+                            caption: 'Açıklama',
+                            dataField: "description"
+                        },
+                        {
+                            caption: 'Arıza Durumu',
+                            dataField: "faultIsFixxed"
+                        },
+                        {
+                            dataField: "createdDate",
+                            caption: "Kayıt Tarihi",
+                            dataType: "date",
+                            format: 'dd/MM/yyyy HH:mm',
+                            sortOrder: "desc"
+                        }
+                    ]
+                }).dxDataGrid("instance")
+            });
+
+          
+
+
+
+
+
+    </script>
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@model List<FailureLogging>
+    <h3>Failure Record</h3>
+
+    <table class="table table-bordered" id="personel">
+        <tr>
+            <th>UserName</th>
+            <th>UserSurname</th>
+            <th>Email</th>
+            <th>PhoneNumber</th>
+            <th>Adres</th>
+            <th>Description</th>
+            <th>Created Date</th>
+
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ApplicationUser.Name</td>
+                <td>@item.ApplicationUser.Surname</td>
+                <td>@item.ApplicationUser.Email</td>
+                <td>@item.PhoneNumber</td>
+                <td>@item.Address</td>
+                <td>@item.Description</td>
+                <td>@item.CreatedDate</td>
+
+            </tr>
+        }
+
+    </table>
+
+    <style>
+        #personel {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+            #personel td, #personel th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            #personel tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            #personel th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #2c3e50;
+                color: white;
+            }
+    </style>*@
+
